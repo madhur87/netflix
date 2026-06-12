@@ -1,9 +1,11 @@
+import Body from "./componets/Body";
+
 const App = () => {
   return (
     <div>
-      <h1 className="font-bold">Hello World</h1>
+      <Body />
     </div>
-  )
-}
+  );
+};
 
 export default App;
