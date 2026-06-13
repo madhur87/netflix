@@ -4,15 +4,20 @@ const VideoBackground = (props) => {
   useTrailerBackground(props.movie_id);
   const getTrailer = useSelector((store) => store.movies?.trailer);
 
+  if (!getTrailer) {
+  return <div>Loading trailer...</div>;
+}
+
   return (
     <div>
       <iframe
-        className="w-screen aspect-video shadow-lg "
-        src={`https://www.youtube.com/embed/${getTrailer}?&autoplay=1&mute=1`}
+        className="w-screen aspect-video shadow-lg"
+        src={`https://www.youtube.com/embed/${getTrailer}?autoplay=1&mute=1&controls=0`}
         title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="autoplay; encrypted-media"
         referrerPolicy="strict-origin-when-cross-origin"
-      ></iframe>
+        allowFullScreen
+      />
     </div>
   );
 };
