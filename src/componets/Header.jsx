@@ -1,17 +1,34 @@
 import { LOGO_URL, USER_AVATAR } from "../utils/constain";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { addUser, removeUser } from "../utils/userSlice";
+
 
 const Header = () => {
   const navigate = useNavigate();
   const isUser = useSelector((store)=> store.user)
+  const dispatch = useDispatch()
+
+    useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+        dispatch(addUser({ uid, email, displayName }));
+        navigate("/browser");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    return () => unsubscribe()
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        navigate("/");
       })
       .catch(() => {
         navigate("/error");
@@ -23,8 +40,7 @@ const Header = () => {
       {isUser && (
         <div className="flex p-2">
           <img className="w-10 h-10" src={USER_AVATAR} alt="user-icon" />
-          <p>{isUser?.displayName}</p>
-          <button onClick={handleSignOut} className="font-bold text-white px-2">
+          <button onClick={handleSignOut} className="font-bold text-white mx-2 px-5 hover:bg-white/90 hover:text-black cursor-pointer">
             Sign Out
           </button>
         </div>
