@@ -4,7 +4,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     userInfo: null,
-    lang: null,
+    lang: 'english',
   },
   reducers: {
     addUser: (state, action) => {
