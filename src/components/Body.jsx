@@ -14,10 +14,6 @@ const Body = () => {
       element: <Browser />,
     },
     {
-      path: "/search",
-      element: <GPTSearch/>
-    },
-    {
       path: "/error",
       element: <Error />,
     },
