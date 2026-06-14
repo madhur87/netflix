@@ -16,4 +16,10 @@ export const API_OPTION = {
   },
 };
 
-export const IMAGE_CDN_URL = "https://image.tmdb.org/t/p/w780/"
+export const IMAGE_CDN_URL = "https://image.tmdb.org/t/p/w780/";
+
+export const SUPPORT_LANG = [
+  { identifier: "english", name: "English" },
+  { identifier: "hindi", name: "Hindi" },
+  { identifier: "spanish", name: "Spanish" },
+];

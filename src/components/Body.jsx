@@ -2,6 +2,7 @@ import Login from "./login";
 import Browser from "./Browser";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./Error";
+import GPTSearch from "./GPTSearch";
 const Body = () => {
   const bobyRouter = createBrowserRouter([
     {
@@ -11,6 +12,10 @@ const Body = () => {
     {
       path: "/browser",
       element: <Browser />,
+    },
+    {
+      path: "/search",
+      element: <GPTSearch/>
     },
     {
       path: "/error",
